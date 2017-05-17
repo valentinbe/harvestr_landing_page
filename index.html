@@ -33,13 +33,23 @@
 
   <style type="text/css">
   
+	body{
+		color: #333;
+		letter-spacing: 0.4px;
+	}
+	.ui.header{
+		color: #333;
+	}
 
-  blockquote{
-      font-size: 1.63em;
-      line-height: 1.4285em;
-  }
+	blockquote{
+		font-size: 1.63em;
+		line-height: 1.4285em;
+		letter-spacing: 0.6px;
+	}
 
- 
+ 	.ui.secondary.inverted.pointing.menu{
+ 		border: none;
+ 	}
 
     #Email, #ButtonSubmit{
         margin-bottom: 10px;
@@ -58,7 +68,7 @@
       display: none;
     }
     .ui.inverted.segment.background, .ui.primary.inverted.segment.background {
-        background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(assets/images/maindesc.jpg);
+        background: linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) ), url(assets/images/maindesc.jpg);
         background-repeat: no-repeat;
         background-size: cover;
     }
@@ -154,6 +164,7 @@
       #smallscreenremove1, #smallscreenremove2{
         display: block;
       }
+
 
     @media only screen and (max-width: 767px){
       .ui.ui.vertical.stripe.benefits-description{
@@ -326,7 +337,7 @@
     </div>
   </div>
   <div class="actions">
-    <div class="ui validate button" onclick="postMessageToGoogle()">Send</div>
+    <div class="ui validate primary button" onclick="postMessageToGoogle()">Send</div>
     <div class="ui cancel button">Cancel</div>
   </div>
 </div>
@@ -392,7 +403,7 @@
     <div class="row">
         <div class="twelve wide column left aligned">
             <h1 class="ui inverted header">
-            Harvestr, the Product Discovery platform for Product Managers.
+            Harvestr, the product discovery platform for product managers.
             </h1>
             <h2>Store and manage all user feedback in one single place.
             Engage users to build better products.</h2>
