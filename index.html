@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Standard Meta -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <!-- Site Properties -->
+  <title>Homepage - Semantic</title>
+  <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon"> 
+  <link rel="stylesheet" type="text/css" href="./dist/components/reset.css">
+  <link rel="stylesheet" type="text/css" href="./dist/components/site.css">
+
+  <link rel="stylesheet" type="text/css" href="./dist/components/container.css">
+  <link rel="stylesheet" type="text/css" href="./dist/components/grid.css">
+  <link rel="stylesheet" type="text/css" href="./dist/components/header.css">
+  <link rel="stylesheet" type="text/css" href="./dist/components/image.css">
+  <link rel="stylesheet" type="text/css" href="./dist/components/menu.css">
+  <link rel="stylesheet" type="text/css" href="./dist/components/input.css">
+
+  <link rel="stylesheet" type="text/css" href="./dist/components/divider.css">
+  <link rel="stylesheet" type="text/css" href="./dist/components/dropdown.css">
+  <link rel="stylesheet" type="text/css" href="./dist/components/segment.css">
+  <link rel="stylesheet" type="text/css" href="./dist/components/button.css">
+  <link rel="stylesheet" type="text/css" href="./dist/components/list.css">
+  <link rel="stylesheet" type="text/css" href="./dist/components/icon.css">
+  <link rel="stylesheet" type="text/css" href="./dist/components/sidebar.css">
+  <link rel="stylesheet" type="text/css" href="./dist/components/transition.css">
+
+  <style type="text/css">
+  
+
+  blockquote{
+      font-size: 1.33em;
+      line-height: 1.4285em;
+  }
+
+ 
+
+    #Email, #ButtonSubmit{
+        margin-bottom: 10px;
+        margin-top: 20px;
+    }
+
+    #ButtonSubmit{
+      border-radius: 0px 0.28571429rem 0.28571429rem 0px;
+    }
+
+    #Botheader{
+      margin-bottom: 150px;
+    }
+
+    .hidden.menu {
+      display: none;
+    }
+    .ui.inverted.segment.background, .ui.primary.inverted.segment.background {
+        background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(assets/images/maindesc.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .masthead.segment {
+      min-height: 700px;
+      padding: 1em 0em;
+    }
+    .masthead .logo.item img {
+      margin-right: 1em;
+    }
+    .masthead .ui.menu .ui.button {
+      margin-left: 0.5em;
+    }
+    .masthead h1.ui.header {
+      margin-top: 3em;
+      margin-bottom: 0em;
+      font-size: 4em;
+      font-weight: normal;
+    }
+    .masthead h2 {
+      font-size: 1.7em;
+      font-weight: normal;
+    }
+    .ui.vertical.stripe {
+      padding: 8em 0em;
+    }
+    .ui.vertical.stripe h3 {
+      font-size: 2em;
+    }
+    .ui.vertical.stripe .button + h3,
+    .ui.vertical.stripe p + h3 {
+      margin-top: 3em;
+    }
+    .ui.vertical.stripe .floated.image {
+      clear: both;
+    }
+    .ui.vertical.stripe p {
+      font-size: 1.33em;
+    }
+    .ui.vertical.stripe .horizontal.divider {
+      margin: 3em 0em;
+    }
+    .quote.stripe.segment {
+      padding: 0em;
+    }
+    .quote.stripe.segment .grid .column {
+      padding-top: 5em;
+      padding-bottom: 5em;
+    }
+    .footer.segment {
+      padding: 5em 0em;
+    }
+    .secondary.pointing.menu .toc.item {
+      display: none;
+    }
+
+    .ui.fixed.menu .toc.item{
+        display: none;
+      }
+    @media only screen and (max-width: 700px) {
+      .ui.fixed.menu .item{
+        display: none;
+      }
+
+      .ui.fixed.menu .toc.item{
+        display: block;
+        margin-top: 10px;
+      }
+      
+      .secondary.pointing.menu .item,
+      .secondary.pointing.menu .menu {
+        display: none;
+      }
+      .secondary.pointing.menu .toc.item {
+        display: block;
+      }
+      .masthead.segment {
+        min-height: 350px;
+      }
+      .masthead h1.ui.header {
+        font-size: 2em;
+        margin-top: 1.5em;
+      }
+      .masthead h2 {
+        margin-top: 0.5em;
+        font-size: 1.5em;
+      }
+    }
+
+    #smallscreenadd1, #smallscreenadd2{
+        display: none;
+      }
+      #smallscreenremove1, #smallscreenremove2{
+        display: block;
+      }
+
+    @media only screen and (max-width: 767px){
+      #smallscreenadd1, #smallscreenadd2{
+        display: block;
+      }
+      #smallscreenremove1, #smallscreenremove2{
+        display: none;
+      }
+    }
+
+    @media only screen and (max-width: 470px) {
+      .txtremove{
+        display: none;
+      }
+    }
+  </style>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="./dist/components/visibility.js"></script>
+  <script src="./dist/components/sidebar.js"></script>
+  <script src="./dist/components/transition.js"></script>
+  <script>
+  $(document)
+    .ready(function() {
+      // fix menu when passed
+      $('.masthead')
+        .visibility({
+          once: false,
+          onBottomPassed: function() {
+            $('.fixed.menu').transition('fade in');
+          },
+          onBottomPassedReverse: function() {
+            $('.fixed.menu').transition('fade out');
+          }
+        })
+      ;
+      // create sidebar and attach to menu open
+      $('.ui.sidebar')
+        .sidebar('attach events', '.toc.item')
+      ;
+
+      $('.ui.form')
+      .form({
+        on: 'blur',
+        fields: {
+          email: {
+            identifier  : 'email',
+            rules: [
+              {
+                type   : 'email',
+                prompt : 'Please enter a valid e-mail'
+              }
+            ]
+          }
+        }
+      })
+    ;
+
+    })
+  ;
+
+
+
+  function postContactToGoogle() {
+    var email = $('#Email').val();
+    if(email!=""){
+      $.ajax({
+        url: "https://docs.google.com/a/hec.edu/forms/d/e/1FAIpQLSeLEIXeeoeqHefEVqV1vz9wO2Y5wzXFCbWNF3yN-A-67ImUqw/formResponse",
+        data: { "entry.771099229": email},
+        type: "POST",
+        dataType: "xml",
+        statusCode: {
+          0: function () {
+            // window.location.replace("ThankYou.html");
+          },
+          200: function () {
+            //  window.location.replace("ThankYou.html");
+          }
+        }
+      });
+    }
+  }
+  
+  </script>
+</head>
+<body>
+
+<!-- Sidebar Menu -->
+<div class="ui vertical inverted sidebar right menu">
+    <a class="active item" href="#home">Home</a>
+    <a class="item" href="#about_us">About Us</a>
+    <a class="item" href="#testimonials">Testimonials</a>
+</div>
+
+<!-- Page Contents -->
+<div class="pusher">
+
+<!-- Following Menu -->
+<div class="ui large top fixed hidden borderless menu">
+  <div class="ui container">
+    <div class="ui small image">
+      <a href="#home">
+        <svg width="150" height="60" style="margin-bottom: 8px;">
+          <image xlink:href="assets/images/logob.png" x="0" y="0" width="100%" height="100%"></image>
+        </svg>
+      </a>
+      </div>
+      
+    <div class="right menu">
+          <a class="active item" href="#home">Home</a>
+          <a class="item" href="#about_us">About Us</a>
+          <a class="item" href="#testimonials">Testimonials</a>
+          <a class="toc item">
+            <i class="sidebar icon"></i>
+          </a>
+    </div>
+  </div>
+</div>
+
+  <div class="ui inverted vertical masthead center aligned segment background">
+    <a id="home"></a>
+    <div class="ui container">
+      <div class="ui large secondary inverted pointing menu">
+        <div class="ui small image">
+          <svg width="150" height="65">
+            <image xlink:href="assets/images/logow.png" x="0" y="0" width="100%" height="100%"></image>
+          </svg>
+        </div>
+
+        <div class="right item">
+            <a class="active item" href="#home">Home</a>
+            <a class="item" href="#about_us">About Us</a>
+            <a class="item" href="#testimonials">Testimonials</a>
+            <a class="toc item">
+              <i class="sidebar icon"></i>
+            </a>
+        </div>
+      </div>
+    </div>
+
+
+<div class="ui middle aligned stackable grid container">
+    <div class="row">
+        <div class="twelve wide column left aligned">
+            <h1 class="ui inverted header">
+            Harvestr, the Product Discovery platform for Product Managers.
+            </h1>
+            <h2>Store and manage all user feedback in one single place.
+            Engage users to build better products.</h2>
+            <p></p>
+        </div>
+            <div class="nine wide column left aligned">
+
+            
+              <form class="ui form error">
+                <div class="ui action huge fluid input">
+                <input id="Email" name="email" type="email" placeholder="Your email...">
+                <button id="ButtonSubmit" class="ui huge orange submit button" onclick="postContactToGoogle()"><div class="txtremove">Get a free trial </div><i class="right arrow icon"></i></button>
+                <div class="ui error message"></div>
+                </div>
+              </form>
+              <div id="Botheader"></div>
+        </div>
+    </div>
+</div>
+</div>
+
+<a id="about_us"></a>
+  <div class="ui vertical stripe segment">
+    <div class="ui middle aligned stackable grid container">
+      <div class="row">
+        <div id="smallscreenadd1" class="six wide right floated column">
+          <img src="assets/images/a.png" class="ui large  rounded image">
+        </div>
+        <div class="eight wide column">
+          <h3 class="ui header">A comprehensive user knowledge base for Product Managers</h3>
+          <p>Harvestr integrates with existing business applications to aggregate all product related feedback. Never lose valuable feedback again.</p>
+        </div>
+        <div id="smallscreenremove1" class="six wide right floated column">
+          <img src="assets/images/a.png" class="ui large  rounded image">
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="ui vertical stripe segment">
+    <div class="ui middle aligned stackable grid container">
+      <div class="row">
+        <div class="six wide column">
+          <img src="assets/images/b.png" class="ui large  rounded image">
+        </div>
+        <div class="eight wide right floated column">
+          <h3 class="ui header">Identify issues and improvement opportunities quickly</h3>
+          <p>Our interface makes it easy for you to organise feedback and to extract insights that will give you a comprehensive view on the most urgent needs.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui vertical stripe segment">
+    <div class="ui middle aligned stackable grid container">
+      <div class="row">
+        <div id="smallscreenadd2" class="six wide right floated column">
+          <img src="assets/images/c.png" class="ui large  rounded image">
+        </div>
+        <div class="eight wide column">
+          <h3 class="ui header">Close the feedback loop and improve product communication</h3>
+          <p>Interact with users and teammates without leaving Harvestr. Keep everyone in the loop by providing updates about product related decisions and improvements.</p>
+        </div>
+        <div id="smallscreenremove2" class="six wide right floated column">
+          <img src="assets/images/c.png" class="ui large  rounded image">
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="ui vertical stripe segment">
+    <div class="ui middle aligned stackable grid container">
+      <div class="row">
+        <div class="six wide column">
+          <img src="assets/images/wireframe/white-image.png" class="ui large  rounded image">
+        </div>
+        <div class="eight wide right floated column">
+          <h3 class="ui header">Get better feedback and increase user retention</h3>
+          <p>Engaging users and teammates increases the quality of their contributions and helps Product Managers develop features and products that will be used even more. </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<a id="testimonials"></a>
+  <div class="ui vertical stripe quote segment">
+    <div class="ui equal width stackable grid">
+      <div class="center aligned row orange">
+        <div class="column">
+          <blockquote><i>“I need user analysis and reports but I also need to dig deeper into the large amount of feedback we have 
+              to get more details, to look at verbatims, etc.”</i> </blockquote>
+          <p>
+            <img src="assets/images/profile.jpg" class="ui avatar image"> <b>Lucas Didier</b> Product Manager @ Blablacar
+          </p>
+        </div>
+        <div class="column">
+            <h3>"Great job Harvestr!"</h3>
+          <blockquote><i>"At Aircall, the support, sales and customer success teams have a lot of valuable customer feedback to share. 
+              I really need a tool to aggregate this information and to communicate about product-related decisions to the other teams. 
+              "</i> </blockquote>
+          <p>
+            <img src="assets/images/profile.jpg" class="ui avatar image"> <b>Maïa Metz</b> Head of Product @ Aircall
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="ui vertical stripe segment">
+    <div class="ui text container">
+      <h3 class="ui header">Be among the first to try Harvestr for free!</h3>
+      <p>Harvestr is the perfect app for Product Managers, Product Owners, User Researchers and everyone else trying to develop the best products and services for their users. We are working hard to launch soon. </p>
+      <button class="ui huge orange button" onclick="location.href='#home';">Get a free trial <i class="right arrow icon"></i></button>
+    </div>
+  </div>
+
+
+  <div class="ui inverted vertical footer segment">
+    <div class="ui container">
+      <div class="ui stackable inverted divided equal height stackable grid">
+        <div class="three wide column">
+          <h4 class="ui inverted header">About</h4>
+          <div class="ui inverted link list">
+            <a href="#" class="item">Contact Us</a>
+          </div>
+        </div>
+        <div class="seven wide column">
+          <h4 class="ui inverted header">Harvestr, the Product Discovery platform for Product Managers.</h4>
+          <p>Store and manage all user feedback in one single place.
+            Engage users to build better products.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+
+</html>
