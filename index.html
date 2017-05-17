@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
   <!-- Site Properties -->
-  <title>Homepage - Semantic</title>
+  <title>Harvestr - User centric Product Developement</title>
   <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon"> 
   <link rel="stylesheet" type="text/css" href="./dist/components/reset.css">
   <link rel="stylesheet" type="text/css" href="./dist/components/site.css">
@@ -18,6 +18,9 @@
   <link rel="stylesheet" type="text/css" href="./dist/components/image.css">
   <link rel="stylesheet" type="text/css" href="./dist/components/menu.css">
   <link rel="stylesheet" type="text/css" href="./dist/components/input.css">
+  <link rel="stylesheet" type="text/css" href="./dist/components/dimmer.css">
+  <link rel="stylesheet" type="text/css" href="./dist/components/modal.css">
+  <link rel="stylesheet" type="text/css" href="./dist/components/form.css">
 
   <link rel="stylesheet" type="text/css" href="./dist/components/divider.css">
   <link rel="stylesheet" type="text/css" href="./dist/components/dropdown.css">
@@ -32,7 +35,7 @@
   
 
   blockquote{
-      font-size: 1.33em;
+      font-size: 1.63em;
       line-height: 1.4285em;
   }
 
@@ -153,10 +156,19 @@
       }
 
     @media only screen and (max-width: 767px){
+      .ui.ui.vertical.stripe.benefits-description{
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+
       #smallscreenadd1, #smallscreenadd2{
-        display: block;
+        display: none;
       }
       #smallscreenremove1, #smallscreenremove2{
+        display: none;
+      }
+
+      #smallscreenremove3, #smallscreenremove4{
         display: none;
       }
     }
@@ -172,6 +184,9 @@
   <script src="./dist/components/visibility.js"></script>
   <script src="./dist/components/sidebar.js"></script>
   <script src="./dist/components/transition.js"></script>
+  <script src="./dist/components/dimmer.js"></script>
+  <script src="./dist/components/modal.js"></script>
+  <script src="./dist/components/form.js"></script>
   <script>
   $(document)
     .ready(function() {
@@ -209,14 +224,50 @@
       })
     ;
 
+    $('.second.modal')
+      .modal('attach events', '.fullscreen.modal .validate.button')
+    ;
+
+    $('.sendButton').attr('disabled',true);
+        $('#message').keyup(function(){
+            if($(this).val().length !=0)
+                $('.sendButton').attr('disabled', false);            
+            else
+                $('.sendButton').attr('disabled',true);
+        });
+
     })
   ;
 
+  function validateEmail(email) {
+  var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(email);
+  }
 
+  function postMessageToGoogle(){
+    var email = $('#contactMail').val();
+    var message = $('#contactMessage').val();
+    if (validateEmail(email)) {
+      $.ajax({
+        url: "https://docs.google.com/a/hec.edu/forms/d/e/1FAIpQLSeLEIXeeoeqHefEVqV1vz9wO2Y5wzXFCbWNF3yN-A-67ImUqw/formResponse",
+        data: { "entry.771099229": email, "entry.813514568": message},
+        type: "POST",
+        dataType: "xml",
+        statusCode: {
+          0: function () {
+            // window.location.replace("ThankYou.html");
+          },
+          200: function () {
+            //  window.location.replace("ThankYou.html");
+          }
+        }
+      });
+    }
+  }
 
   function postContactToGoogle() {
     var email = $('#Email').val();
-    if(email!=""){
+    if (validateEmail(email)) {
       $.ajax({
         url: "https://docs.google.com/a/hec.edu/forms/d/e/1FAIpQLSeLEIXeeoeqHefEVqV1vz9wO2Y5wzXFCbWNF3yN-A-67ImUqw/formResponse",
         data: { "entry.771099229": email},
@@ -233,6 +284,20 @@
       });
     }
   }
+
+  function openModal(){
+      $('.fullscreen.modal')
+        .modal('show')
+      ;
+    }
+
+    $('.coupled.modal')
+  .modal({
+    allowMultiple: false
+  })
+;
+
+
   
   </script>
 </head>
@@ -240,9 +305,40 @@
 
 <!-- Sidebar Menu -->
 <div class="ui vertical inverted sidebar right menu">
-    <a class="active item" href="#home">Home</a>
+    <a class="item" href="#home">Home</a>
     <a class="item" href="#about_us">About Us</a>
     <a class="item" href="#testimonials">Testimonials</a>
+</div>
+
+
+<div class="ui fullscreen modal">
+  <div class="header">Contact Us</div>
+  <div class="content">
+    <div class="ui form">
+      <div class="field">
+        <label>Your email</label>
+        <input id="contactMail" type="email" name="email" placeholder="Email..." required>
+      </div>
+      <div class="field">
+        <label>Your message</label>
+        <textarea id="contactMessage" type="text" name="message"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="ui validate button" onclick="postMessageToGoogle()">Send</div>
+    <div class="ui cancel button">Cancel</div>
+  </div>
+</div>
+
+<div class="ui second modal">
+  <div class="header">Thank you!</div>
+  <div class="content">
+    <p>We will get back to you soon.</p>
+  </div>
+  <div class="actions">
+    <div class="ui cancel green button">OK</div>
+  </div>
 </div>
 
 <!-- Page Contents -->
@@ -260,7 +356,7 @@
       </div>
       
     <div class="right menu">
-          <a class="active item" href="#home">Home</a>
+          <a class="item" href="#home">Home</a>
           <a class="item" href="#about_us">About Us</a>
           <a class="item" href="#testimonials">Testimonials</a>
           <a class="toc item">
@@ -281,7 +377,7 @@
         </div>
 
         <div class="right item">
-            <a class="active item" href="#home">Home</a>
+            <a class="item" href="#home">Home</a>
             <a class="item" href="#about_us">About Us</a>
             <a class="item" href="#testimonials">Testimonials</a>
             <a class="toc item">
@@ -302,14 +398,11 @@
             Engage users to build better products.</h2>
             <p></p>
         </div>
-            <div class="nine wide column left aligned">
-
-            
+            <div class="nine wide column left aligned">         
               <form class="ui form error">
                 <div class="ui action huge fluid input">
                 <input id="Email" name="email" type="email" placeholder="Your email...">
                 <button id="ButtonSubmit" class="ui huge orange submit button" onclick="postContactToGoogle()"><div class="txtremove">Get a free trial </div><i class="right arrow icon"></i></button>
-                <div class="ui error message"></div>
                 </div>
               </form>
               <div id="Botheader"></div>
@@ -319,28 +412,28 @@
 </div>
 
 <a id="about_us"></a>
-  <div class="ui vertical stripe segment">
+  <div class="ui vertical stripe segment benefits-description">
     <div class="ui middle aligned stackable grid container">
       <div class="row">
         <div id="smallscreenadd1" class="six wide right floated column">
-          <img src="assets/images/a.png" class="ui large  rounded image">
+          <img src="assets/images/a.png" class="ui large  rounded image" style="width:270px;">
         </div>
         <div class="eight wide column">
           <h3 class="ui header">A comprehensive user knowledge base for Product Managers</h3>
           <p>Harvestr integrates with existing business applications to aggregate all product related feedback. Never lose valuable feedback again.</p>
         </div>
         <div id="smallscreenremove1" class="six wide right floated column">
-          <img src="assets/images/a.png" class="ui large  rounded image">
+          <img src="assets/images/a.png" class="ui large  rounded image" style="width:270px;">
         </div>
       </div>
     </div>
   </div>
 
-<div class="ui vertical stripe segment">
+<div class="ui vertical stripe segment benefits-description">
     <div class="ui middle aligned stackable grid container">
       <div class="row">
-        <div class="six wide column">
-          <img src="assets/images/b.png" class="ui large  rounded image">
+        <div id="smallscreenremove3" class="six wide column" style="text-align: -webkit-right;">
+          <img src="assets/images/b.png" class="ui large  rounded image" style="width:270px;">
         </div>
         <div class="eight wide right floated column">
           <h3 class="ui header">Identify issues and improvement opportunities quickly</h3>
@@ -350,28 +443,28 @@
     </div>
   </div>
 
-  <div class="ui vertical stripe segment">
+  <div class="ui vertical stripe segment benefits-description">
     <div class="ui middle aligned stackable grid container">
       <div class="row">
         <div id="smallscreenadd2" class="six wide right floated column">
-          <img src="assets/images/c.png" class="ui large  rounded image">
+          <img src="assets/images/c.png" class="ui large  rounded image" style="width:270px;">
         </div>
         <div class="eight wide column">
           <h3 class="ui header">Close the feedback loop and improve product communication</h3>
           <p>Interact with users and teammates without leaving Harvestr. Keep everyone in the loop by providing updates about product related decisions and improvements.</p>
         </div>
         <div id="smallscreenremove2" class="six wide right floated column">
-          <img src="assets/images/c.png" class="ui large  rounded image">
+          <img src="assets/images/c.png" class="ui large  rounded image" style="width:270px;">
         </div>
       </div>
     </div>
   </div>
 
-<div class="ui vertical stripe segment">
+<div class="ui vertical stripe segment benefits-description">
     <div class="ui middle aligned stackable grid container">
       <div class="row">
-        <div class="six wide column">
-          <img src="assets/images/wireframe/white-image.png" class="ui large  rounded image">
+        <div id="smallscreenremove4" class="six wide column" style="text-align: -webkit-right;">
+          <img src="assets/images/d.png" class="ui large  rounded image" style="width:270px;">
         </div>
         <div class="eight wide right floated column">
           <h3 class="ui header">Get better feedback and increase user retention</h3>
@@ -384,22 +477,16 @@
 
 <a id="testimonials"></a>
   <div class="ui vertical stripe quote segment">
-    <div class="ui equal width stackable grid">
-      <div class="center aligned row orange">
-        <div class="column">
-          <blockquote><i>“I need user analysis and reports but I also need to dig deeper into the large amount of feedback we have 
-              to get more details, to look at verbatims, etc.”</i> </blockquote>
-          <p>
-            <img src="assets/images/profile.jpg" class="ui avatar image"> <b>Lucas Didier</b> Product Manager @ Blablacar
-          </p>
-        </div>
-        <div class="column">
-            <h3>"Great job Harvestr!"</h3>
+    <div class="ui middle aligned equal width stackable grid">
+      <div class="center aligned row orange" style="
+    padding-bottom: 50px;">
+        <div class="four wide column"></div>
+        <div class="eight wide column">
           <blockquote><i>"At Aircall, the support, sales and customer success teams have a lot of valuable customer feedback to share. 
               I really need a tool to aggregate this information and to communicate about product-related decisions to the other teams. 
-              "</i> </blockquote>
-          <p>
-            <img src="assets/images/profile.jpg" class="ui avatar image"> <b>Maïa Metz</b> Head of Product @ Aircall
+              Great job Harvestr!"</i> </blockquote>
+          <p style="font-size: 1.63em;">
+            <img src="assets/images/profile.jpg" class="ui avatar image"> <b></b><b>Maïa Metz</b> Head of Product @ Aircall
           </p>
         </div>
       </div>
@@ -422,7 +509,7 @@
         <div class="three wide column">
           <h4 class="ui inverted header">About</h4>
           <div class="ui inverted link list">
-            <a href="#" class="item">Contact Us</a>
+            <a onclick="openModal()" class="item">Contact Us</a>
           </div>
         </div>
         <div class="seven wide column">
